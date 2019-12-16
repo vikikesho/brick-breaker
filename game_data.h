@@ -5,18 +5,9 @@
 #ifndef CTDL_PROJECT01__GAME_DATA_H
 #define CTDL_PROJECT01__GAME_DATA_H
 
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <math.h>
-#include <algorithm>
-#include <iostream>
-#include <sstream>
 #include <vector>
-#include"ball.h"
-#include<algorithm>
-using namespace sf;
+
 // kiểm tra nếu value < min thì trả về -1, nếu value > max thì trả về 1, còn lại trả về 0
 int out_of_bounds(float value, float min, float max);
 
@@ -114,7 +105,7 @@ public:
 	// trả về: tọa độ y được đảm bảo nằm trong biên 
 	float coerce_in_y(float pos_y, float size_y);
 } *game_data;
+
 void init_game_data();
 
-
-#endif //CTDL_PROJECT01__GAME_DATA
+#endif //CTDL_PROJECT01__GAME_DATA_H

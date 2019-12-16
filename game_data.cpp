@@ -36,12 +36,13 @@ std::vector<sf::Shape*>* _game_data::player_shape(bool top_player) {
 
 std::vector<sf::Shape*>* _game_data::ball_shape() {
 	// vẽ nền banh hình vuông
-	auto ball = new sf::CircleShape(b_size,3);
-	ball->setFillColor(sf::Color::Magenta);
+	auto ball = new sf::CircleShape(b_size, 4);
+	ball->setFillColor(sf::Color::Cyan);
 	ball->setOrigin(b_size, b_size);
 	//    auto decor = new sf::CircleShape(b_decor, 8);
 	//    decor->setFillColor(sf::Color::Blue);
 	//    decor->setOrigin(b_decor, b_decor);
+
 		// vẽ trang trí banh
 	auto result = new std::vector<sf::Shape*>(0);
 	result->push_back(ball);
@@ -50,9 +51,9 @@ std::vector<sf::Shape*>* _game_data::ball_shape() {
 }
 // gán các setting cho game
 _game_data::_game_data() {
-	thick_font.loadFromFile("D:\Montserrat-Black.ttf");
-	thin_font.loadFromFile("D:\OpenSans-Light.ttf");
-	cursive_font.loadFromFile("D:\Satisfy-Regular.ttf");
+	thick_font.loadFromFile("Montserrat-Black.ttf");
+	thin_font.loadFromFile("OpenSans-Light.ttf");
+	cursive_font.loadFromFile("Satisfy-Regular.ttf");
 	fullscreen = false;
 
 	p_size = 50.f;
@@ -62,15 +63,15 @@ _game_data::_game_data() {
 	p_min_speed = 250;
 	p_max_speed = 600;
 	p_accel = 250;
-	p_score = 5;
+	p_score = 3;
 	p_score_gap = 40;
 
 	p1_negative = sf::Keyboard::Left;
 	p1_positive = sf::Keyboard::Right;
 	p2_negative = sf::Keyboard::A;
 	p2_positive = sf::Keyboard::D;
-	p1_color = sf::Color::Cyan;
-	p2_color = sf::Color(466, 250, 277);
+	p1_color = sf::Color::Magenta;
+	p2_color = sf::Color(0, 220, 0);
 
 	b_size = 15;
 	b_decor = 5;
@@ -165,7 +166,7 @@ sf::Text* _game_data::player_score(bool top_player) {
 	result->setFont(thick_font);
 	result->setCharacterSize(40 * font_multiplier);
 	result->setFillColor(top_player ? p1_color : p2_color);
-	result->setString("x0");
+	result->setString("0");
 	if (top_player)
 		align(*result, 0, 2, p1_y - p_score_gap, -1);
 	else align(*result, 0, 2, p2_y + p_score_gap, 1);
@@ -208,7 +209,7 @@ std::vector<sf::Text>* _game_data::main_menu_text() {
 	sf::Text welcome, team_name, name, pvp, pvc, fullscreen, quit;
 	name.setFont(thick_font);
 	name.setCharacterSize(72 * font_multiplier);
-	name.setString("PONG GAME");
+	name.setString("PONG");
 	align(name, play_pos_center, 0, 0);
 	auto anchor = name.getGlobalBounds();
 
@@ -220,7 +221,7 @@ std::vector<sf::Text>* _game_data::main_menu_text() {
 
 	team_name.setFont(cursive_font);
 	team_name.setCharacterSize(60 * font_multiplier);
-	team_name.setString("Team SFML");
+	team_name.setString("Team Sfml");
 	align(team_name, play_pos_center.x, 0, welcome_anchor.top - 10, -1);
 
 	init_menu_item(pvp, "Player vs Player");
@@ -276,4 +277,3 @@ std::vector<sf::Text>* _game_data::pause_menu_text() {
 	result->push_back(press_key);
 	return result;
 }
-

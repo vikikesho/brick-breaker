@@ -1,11 +1,12 @@
-﻿//
+﻿
+//
 // Created by quan on 26/10/2019.
 //
 
 #include <cmath>
 #include "ball.h"
 
-ball::ball(update_context& context) :
+ball::ball(update_context & context) :
 	// yêu cầu graphic của trái banh từ singleton game_data
 	shapes(*game_data->ball_shape()) {
 	// yêu cầu các biến từ game_data
@@ -15,7 +16,6 @@ ball::ball(update_context& context) :
 	reset_all(context);
 	// ở lượt chơi đầu tiên, đợi lâu hơn cho người dùng chuẩn bị
 	wait_time *= 2;
-	
 }
 
 void ball::reset_all(update_context& context) {

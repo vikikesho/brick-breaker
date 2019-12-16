@@ -7,7 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "game_data.h"
-#include<time.h>
+
 class player;
 
 // interface cho trò chơi, chửa void game_over để gọi báo kết thúc trò chơi
@@ -31,7 +31,6 @@ public:
 
 	// cập nhật elapsed_time
 	void update();
-	int exec();
 };
 
 

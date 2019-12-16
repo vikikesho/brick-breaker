@@ -13,7 +13,7 @@
 #include "player_computer.h"
 #include "ball.h"
 #include "button.h"
-using namespace sf;
+
 class update_context;
 
 class pong_game : ball_game {
@@ -58,8 +58,6 @@ public:
 
 	// reset game (bắt đầu ván chơi mới)
 	void reset();
-	void play_sound(Sound& s, float pitch);//them nhac cho game
-	bool list_sound();
 };
 
 #endif //CTDL_PROJECT01_PONG_GAME_H

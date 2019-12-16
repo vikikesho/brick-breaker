@@ -4,10 +4,8 @@
 
 #include "pong_game.h"
 #include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
 
-using namespace sf;
-pong_game* pong_game;
+pong_game* ponggame;//pong_game thanh ponggame
 
 
 void pong_game::reset() {
@@ -179,106 +177,4 @@ void pong_game::game_over(player& losing_player) {
 
 bool pong_game::blinking_state() {
 	return (int)(-wait_time * 2) % 2 == 0;
-}
-void pong_game::play_sound(Sound& s, float pitch)
-{
-	float p = s.getPitch();
-	s.setPitch(pitch);
-	s.play();
-}
-bool pong_game::list_sound() {//Danh sach nhac
-	VideoMode video_mode(320, 240);//khung hinh cho video nhac
-	RenderWindow window(video_mode, "Piano");
-	SoundBuffer soundBuffer1;//Nhac duoc dinh nghia tu file 
-	if (!soundBuffer1.loadFromFile("blip.wav"))
-		return EXIT_FAILURE;//tra ve gia tri 1
-	Sound blip(soundBuffer1);//mo nhac
-
-	SoundBuffer soundBuffer2;
-	if (!soundBuffer2.loadFromFile("blam.wav"))
-		return EXIT_FAILURE;
-	Sound blam(soundBuffer2);
-
-	SoundBuffer soundBuffer3;
-	if (!soundBuffer3.loadFromFile("blap.wav"))
-		return EXIT_FAILURE;
-	Sound blap(soundBuffer3);
-
-	SoundBuffer soundBuffer4;
-	if (!soundBuffer4.loadFromFile("blop.wav"))
-		return EXIT_FAILURE;
-	Sound blop(soundBuffer4);
-
-	Font font;
-	if (!font.loadFromFile("tomb.ttf"))
-		return EXIT_FAILURE;
-
-	Text info("Use the keys \n A Z E R \n Q S D F\n W X C V\n to play sounds.", font, 20);
-	info.setPosition(20, 30);
-	info.setColor(Color::Blue);
-
-	while (window.isOpen())
-	{
-		window.clear();
-		window.draw(info);
-		window.display();
-
-		Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == Event::Closed)
-				window.close();
-			else
-				if (event.type == Event::KeyPressed)
-				{
-					switch (event.key.code)
-					{
-					case Keyboard::Q:
-						play_sound(blip, 1.0);
-						break;
-					case Keyboard::S:
-						play_sound(blam, 1.0);
-						break;
-					case Keyboard::D:
-						play_sound(blap, 1.0);
-						break;
-					case Keyboard::F:
-						play_sound(blop, 1.0);
-						break;
-
-					case Keyboard::W:
-						play_sound(blip, 0.8);
-						break;
-					case Keyboard::X:
-						play_sound(blam, 0.8);
-						break;
-					case Keyboard::C:
-						play_sound(blap, 0.8);
-						break;
-					case Keyboard::V:
-						play_sound(blop, 0.8);
-						break;
-
-					case Keyboard::A:
-						play_sound(blip, 1.2);
-						break;
-					case Keyboard::Z:
-						play_sound(blam, 1.2);
-						break;
-					case Keyboard::E:
-						play_sound(blap, 1.2);
-						break;
-					case Keyboard::R:
-						play_sound(blop, 1.2);
-						break;
-
-					case Keyboard::Escape:window.close();
-						break;
-
-					}
-				}
-		}
-
-	}
-	return EXIT_SUCCESS;//tra ve gia tri 0
 }
