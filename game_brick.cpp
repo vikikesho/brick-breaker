@@ -114,21 +114,21 @@ void Game::setup()
 	bottom.setOutlineColor(Color::Black);
 	bottom.setOutlineThickness(2);
 
-	ball.setPosition(width / 2, height - margin);
-	ball.setSize(Vector2f(20, 20));
-	ball.setFillColor(Color::Green);
-	ball.setOutlineColor(Color::Red);
-	ball.setOutlineThickness(2);
+	_bal.setPosition(width / 2, height - margin);
+	_bal.setSize(Vector2f(10, 10));
+	_bal.setFillColor(Color::Black);
+	_bal.setOutlineColor(Color::Black);
+	_bal.setOutlineThickness(2);
 
-	player.setSize(Vector2f(90, borderSize));
+	player.setSize(Vector2f(70, borderSize));
 	player.setPosition(width / 2 - 45, height - margin - borderSize);
-	player.setFillColor(Color(0, 122, 245));
-	player.setOutlineColor(Color::Green);
+	player.setFillColor(Color(0, 156, 211));
+	player.setOutlineColor(Color::Yellow);
 	player.setOutlineThickness(3);
 
 	title.setString("Break Out!");
 	title.setFont(font);
-	title.setCharacterSize(50);
+	title.setCharacterSize(30);
 	title.setPosition(width / 2 - title.getGlobalBounds().width / 2, 100);
 	title.setFillColor(Color::Blue);
 
@@ -136,36 +136,36 @@ void Game::setup()
 	start.setFont(font);
 	start.setCharacterSize(30);
 	start.setPosition(width / 2 - start.getGlobalBounds().width / 2, 400);
-	start.setFillColor(Color::Red);
+	start.setFillColor(Color::Magenta);
 
 	won.setString("You have won this game.\n\n Congratulations !");
 	won.setFont(font);
-	won.setCharacterSize(20);
+	won.setCharacterSize(25);
 	won.setPosition(width / 2 - won.getGlobalBounds().width / 2, height / 2 - won.getGlobalBounds().height / 2);
 	won.setFillColor(Color::Green);
 
 	lost.setString("You have lost this game, \n better luck next time!");
 	lost.setFont(font);
-	lost.setCharacterSize(20);
+	lost.setCharacterSize(25);
 	lost.setPosition(width / 2 - lost.getGlobalBounds().width / 2, height / 2 - lost.getGlobalBounds().height / 2);
 	lost.setFillColor(Color::Red);
 
 	score.setString("0");
 	score.setFont(font);
-	score.setCharacterSize(30);
-	score.setPosition(width / 2 + score.getGlobalBounds().width / 2, height - 60);
+	score.setCharacterSize(45);
+	score.setPosition(width /1.1 + score.getGlobalBounds().width / 2, height - 60);
 	score.setFillColor(Color(0, 0, 100, 50));
 
 	lives.setString("5");
 	lives.setFont(font);
-	lives.setCharacterSize(50);
-	lives.setPosition(width / 2 - lives.getGlobalBounds().width / 2, height - 60);
+	lives.setCharacterSize(45);
+	lives.setPosition((width) / 2 - lives.getGlobalBounds().width / 2, height - 60);
 	lives.setFillColor(Color(0, 0, 100, 50));
 
 	fps.setString("0");
 	fps.setFont(font);
-	fps.setCharacterSize(30);
-	fps.setPosition(fps.getGlobalBounds().width / 2, height - 40);
+	fps.setCharacterSize(45);
+	fps.setPosition(fps.getGlobalBounds().width / 2, height - 60);
 	fps.setFillColor(Color(52, 0, 100, 50));
 
 	blip = Sound(soundBuffer1);
@@ -176,7 +176,7 @@ void Game::setup()
 	resetGame();
 	gameState = INTRO;
 
-	grid.setDimensions(7, 5);
+	grid.setDimensions(10, 4);
 	grid.left = borderSize + 5;
 	grid.top = borderSize + 5;
 	grid.width = width - 2 * borderSize - 10;
@@ -198,7 +198,7 @@ void Game::display()
 		window.draw(right);
 		grid.display(window);
 		window.draw(player);
-		window.draw(ball);
+		window.draw(_bal);
 		window.draw(score);
 		window.draw(lives);
 		window.draw(top);
@@ -230,7 +230,7 @@ void Game::updatePlayer()
 
 void Game::updateBall()
 {
-	ball.move(ballSpeed.x * updateTime, ballSpeed.y * updateTime);
+	_bal.move(ballSpeed.x * updateTime, ballSpeed.y * updateTime);
 }
 
 void Game::checkCollisions()
@@ -242,40 +242,40 @@ void Game::checkCollisions()
 		Vector2f p = player.getPosition();
 		p.x = clamp(p.x, l.left + l.width + 5, r.left - player.getGlobalBounds().width - 5);
 		player.setPosition(p.x, p.y);
-		blap.play();
-	}
-	if (intersects(ball, top))
-	{
-		FloatRect t = top.getGlobalBounds();
-		FloatRect b = ball.getGlobalBounds();
-		ballSpeed.y = abs(ballSpeed.y);
-		int u = t.top + t.height - b.top;
-		ball.move(0, 2 * u);
 		blop.play();
 	}
-	if (intersects(ball, left))
+	if (intersects(_bal, top))
+	{
+		FloatRect t = top.getGlobalBounds();
+		FloatRect b = _bal.getGlobalBounds();
+		ballSpeed.y = abs(ballSpeed.y);
+		int u = t.top + t.height - b.top;
+		_bal.move(0, 2 * u);
+		blam.play();
+	}
+	if (intersects(_bal, left))
 	{
 		FloatRect l = left.getGlobalBounds();
-		FloatRect b = ball.getGlobalBounds();
+		FloatRect b = _bal.getGlobalBounds();
 		ballSpeed.x = abs(ballSpeed.x);
 		int u = l.left + l.width - b.left;
 		b.left = l.left + l.width + u;
-		ball.setPosition(b.left, b.top);
-		blop.play();
+		_bal.setPosition(b.left, b.top);
+		blap.play();
 	}
 
-	if (intersects(ball, right))
+	if (intersects(_bal, right))
 	{
 		FloatRect r = right.getGlobalBounds();
-		FloatRect b = ball.getGlobalBounds();
+		FloatRect b = _bal.getGlobalBounds();
 		ballSpeed.x = -abs(ballSpeed.x);
 		int u = b.left + b.width - r.left;
 		b.left = r.left - b.width - u;
-		ball.setPosition(b.left, b.top);
+		_bal.setPosition(b.left, b.top);
 		blop.play();
 	}
 
-	if (intersects(ball, bottom))
+	if (intersects(_bal, bottom))
 	{
 		blam.play();
 		playerLives--;
@@ -285,33 +285,33 @@ void Game::checkCollisions()
 		lives.setPosition(width / 2 - lives.getGlobalBounds().width / 2, height - 60);
 		resetBall();
 	}
-	if (intersects(ball, player))
+	if (intersects(_bal, player))
 	{
 		FloatRect p = player.getGlobalBounds();
-		FloatRect b = ball.getGlobalBounds();
+		FloatRect b = _bal.getGlobalBounds();
 		Vector2f o = Vector2f(p.left + p.width / 2, p.top + p.height / 2);
 		Vector2f om = Vector2f(b.left + b.width / 2 - o.x, b.top + b.height / 2 - o.y);
 		om.x /= p.width;
 		om.y /= p.height;
 		float angle = atan2(om.y, om.x);
-		if (angle < -PI / 4 && angle > -3 * PI / 4) 
+		if (angle <= -PI / 4 && angle >= -3 * PI / 4) 
 		{
 			ballSpeed.y = -abs(ballSpeed.y);
 			ballSpeed.x = (b.left + b.width / 2 - p.left - p.width / 2) / 200;
 			int u = b.top + b.height - p.top;
 			b.top = p.top - b.height - u;
-			ball.setPosition(b.left, b.top);
-			ballSpeed.x *= 1.02f;
-			ballSpeed.y *= 1.02f;
+			_bal.setPosition(b.left, b.top);
+			ballSpeed.x *= 1.04f;
+			ballSpeed.y *= 1.04f;
 			blip.play();
 		}
 	}
-	if (grid.collide(ball, ballSpeed, playerScore))
-	{
+	if (grid.collide(_bal, ballSpeed, playerScore))
+	{    
 		blap.play();
-		playerScore += 200;
+		playerScore += 2;
 		std::stringstream str;
-		str << playerScore << " pts  ";
+		str << playerScore << " PTS  ";
 		score.setString(str.str());
 		score.setPosition(width / 2 + score.getGlobalBounds().width / 2 - margin, height - 60);
 	}
@@ -330,9 +330,9 @@ void Game::resetGame()
 void Game::resetBall()
 {
 	FloatRect p = player.getGlobalBounds();
-	FloatRect b = ball.getGlobalBounds();
-	ball.setPosition(p.left + p.width / 2 + 5, p.top);
-	ballSpeed.x = 0.1f;
-	ballSpeed.y = -0.3f;
+	FloatRect b = _bal.getGlobalBounds();
+	_bal.setPosition(p.left + p.width / 2 + 5, p.top);
+	ballSpeed.x = 0.16f;
+	ballSpeed.y = -0.33f;
 }
 

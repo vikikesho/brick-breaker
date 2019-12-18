@@ -17,6 +17,7 @@ struct ball_game {
 
 class update_context {
 public:
+	
 	// clock để đo thời gian đã trôi qua giữa hai update
 	sf::Clock time;
 	// cửa sổ hiện tại

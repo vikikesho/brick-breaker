@@ -28,6 +28,7 @@ class pong_game : ball_game {
 	// dùng để tạo hiệu ứng nhấp nháy
 	bool blinking_state();
 public:
+	
 	// trái banh đề chơi
 	ball b;
 	// thời gian của game (dùng cho hiệu ứng nhấp nháy)

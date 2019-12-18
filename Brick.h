@@ -17,12 +17,12 @@ public:
 
 	Brick() :RectangleShape()
 	{
-		armor = 2;
+		armor = 4;
 	}
 
 	Brick(const Vector2f& size) :RectangleShape(size)
 	{
-		armor = 2;
+		armor = 4;
 	}
 	bool collide(RectangleShape& ball, Vector2f& ballSpeed);
 };

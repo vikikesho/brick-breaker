@@ -16,6 +16,7 @@ protected:
 	void take_user_input(float& move_dir) override;
 
 public:
+	
 	player_human(bool top_player, update_context& context);
 };
 

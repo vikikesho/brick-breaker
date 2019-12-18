@@ -21,9 +21,9 @@ void Grid::init()
 		for (int j = 0; j < columns; j++)
 		{
 			bricks->at(i + j * rows).setSize(cellSize());
-			bricks->at(i + j * rows).setFillColor(Color::Blue);
+			bricks->at(i + j * rows).setFillColor(Color::Red);
 			bricks->at(i + j * rows).setOutlineColor(Color::Black);
-			bricks->at(i + j * rows).setOutlineThickness(3);
+			bricks->at(i + j * rows).setOutlineThickness(1.5);
 			bricks->at(i + j * rows).setPosition(left + j * cellSize().x, top + i * cellSize().y);
 		}
 }
@@ -48,11 +48,20 @@ bool Grid::collide(RectangleShape& ball, Vector2f& ballSpeed, unsigned int& scor
 				continue;
 			if (bricks->at(i + j * rows).collide(ball, ballSpeed))
 			{
-				bricks->at(i + j * rows).armor--;
-				bricks->at(i + j * rows).setFillColor(Color::Green);
-				if (bricks->at(i + j * rows).armor == 0)
-					score += 700;
-
+				if (bricks->at(i + j * rows).armor >= 0) {
+					bricks->at(i + j * rows).armor--;
+					if (bricks->at(i + j * rows).armor == 3) {
+						bricks->at(i + j * rows).setFillColor(Color::Magenta);
+					}
+					if (bricks->at(i + j * rows).armor == 2) {
+						bricks->at(i + j * rows).setFillColor(Color::Blue);
+					}
+					if (bricks->at(i + j * rows).armor == 1) {
+						bricks->at(i + j * rows).setFillColor(Color::Green);
+					}
+					if (bricks->at(i + j * rows).armor == 0)
+						score += 10;
+				}
 				return true;
 			}
 		}

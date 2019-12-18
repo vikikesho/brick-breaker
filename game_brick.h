@@ -1,10 +1,13 @@
 #pragma once
 #include"Brick.h"
 #include"Grid.h"
+#include"ball.h"
+#include"player_human.h"
+#include"button.h"
 class Game
 {
 private:
-	static const int FRAMES_PER_SECOND = 60;
+	static const int FRAMES_PER_SECOND = 100;
 	static const int MAX_FRAMESKIP = 10;
 	static const int width = 640;
 	static const int height = 480;
@@ -12,7 +15,7 @@ private:
 	static const int margin = 50;
 	static const int moveDistance = 40;
 
-
+	
 	RenderWindow window;
 	Font font;
 
@@ -21,7 +24,8 @@ private:
 	RectangleShape right;
 	RectangleShape bottom;
 
-	RectangleShape ball;
+	//ball realBall;
+	RectangleShape _bal;
 
 	Vector2f ballSpeed;
 

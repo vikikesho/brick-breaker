@@ -20,7 +20,7 @@ private:
 	void reset_spin();
 
 public:
-
+	
 	// Danh sách các hình để vẽ banh
 	std::vector<sf::Shape*> shapes;
 

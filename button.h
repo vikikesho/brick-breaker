@@ -18,6 +18,7 @@ class button {
 	sf::Color hover_color;
 
 public:
+	
 	// update nút ấn và trả về true nếu chuột nằm trong nút ấn
 	// mouse_world_pos: vị trí của theo tọa độ của game
 	bool update(sf::Vector2f mouse_world_pos);
